@@ -1,0 +1,49 @@
+h5.card-header.info-color.white-text.text-center.py-4 strong {
+    font-size: 20px;
+}
+
+.card-header {
+    /*background-color: rgb(0 0 0 / 2%);*/
+    background-color: #00000008;
+}
+
+
+.row input {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #d8d8d8;
+    border-radius: 30px;
+    color: #2c2c2c;
+    line-height: normal;
+    font-size: .93em;
+}
+
+.row select {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #d8d8d8;
+    border-radius: 30px;
+    color: #2c2c2c;
+    line-height: normal;
+    font-size: .93em;
+}
+
+.card{
+    padding: 5px 10px !important;
+    border-radius: 1.55rem;
+}
+.card-header{
+    border-radius: 1.1rem !important;
+}
+h3.card-title{
+    margin-top: 10px !important;
+}
+
+
+input[type=radio], input[type=checkbox] {
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+
+.form-control {
+    height: 45px !important;
+}
+
