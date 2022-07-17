@@ -69,6 +69,37 @@
 
             <?php
             }
+            elseif($this->session->userdata('sub_agent_user_role_id') == 'f971e9f3-53z5-9206-a35d-1700188b'){
+                ?>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="<?php echo base_url().'user/dashboard'; ?>">
+                        <div class="card bg-gradient-info overflow-hidden text-white" style="background-image: linear-gradient(to bottom, #4a85fb 0, #163eaf 100%); box-shadow: 0 2px 10px rgb(22 62 175 / 30%);}">
+                            <div class="card-body pb-0">
+                                <p style="font-size: 20px; text-align: center;" class=" mb-1 "><b>Active Applications</b></p>
+                                <p style="font-size: 55px; text-align: center;" class=" mb-1 "><b><?= $sub_agent_get_namebase+$sub_agent_fingerprinting?></b></p>
+                            </div>
+                            <br>
+                        </div>
+                    </a>
+                </div>
+
+
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="<?php echo base_url().'user/dashboard'; ?>">
+                        <div class="card bg-gradient-info overflow-hidden text-white" style="background-image: linear-gradient(to bottom, #fc7a5a 0, #d72e04 100%); box-shadow: 0 2px 10px rgb(215 46 4 / 30%);">
+                            <div class="card-body pb-0">
+                                <p style="font-size: 20px; text-align: center;" class=" mb-1 "><b>Completed Applications</b></p>
+                                <p style="font-size: 55px; text-align: center;" class=" mb-1 "><b><?= $sub_agent_completedget_namebase+$sub_agent_completedfingerprinting ?></b></p>
+                            </div>
+                            <br>
+                        </div>
+                    </a>
+                </div>
+
+
+            <?php
+            }
 
             elseif($this->session->userdata('outsider_user_role_id') == 'f971e9f3-98c9-9243-adrt-1700188b'){
                 ?>

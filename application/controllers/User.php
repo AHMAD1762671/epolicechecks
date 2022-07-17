@@ -361,6 +361,20 @@ class User extends CI_Controller{
         $data['completedrecordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $where);
         $data['completedusEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $where);
 
+        $sub_agent_id = $this->session->userdata('sub_agent_user_id');
+        $subagentwhereuser = array('sub_agent_id' => $sub_agent_id );
+        $one = 1;
+        $data['sub_agent_get_namebase'] = $this->user_model->get_total_record('name_based_applications', $subagentwhereuser);
+        $data['sub_agent_fingerprinting'] = $this->user_model->get_total_record('digital_fingerprinting_applications', $subagentwhereuser);
+       // $data['recordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $subagentwhereuser);
+       // $data['usEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $subagentwhereuser);
+        $subagentwhere = array('sub_agent_id' => $sub_agent_id ,'application_completed' => $one);
+        $data['sub_agent_completedget_namebase'] = $this->user_model->get_total_record('name_based_applications', $subagentwhere);
+        $data['sub_agent_completedfingerprinting'] = $this->user_model->get_total_record('digital_fingerprinting_applications', $subagentwhere);
+        //$data['completedrecordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $subagentwhere);
+        //$data['completedusEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $subagentwhere);
+
+
         $data['comments'] = $this->user_model->get_comments();
         $this->load->view('user/layout', $data);
     }

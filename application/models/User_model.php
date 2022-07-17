@@ -242,7 +242,7 @@ class User_model extends CI_model{
         }
         $this->db->select('name_based_applications.*');
         $this->db->from('name_based_applications');
-        $this->db->where('application_completed', 1);
+      //  $this->db->where('application_completed', 1);
         $this->db->where('sub_agent_id', $this->session->userdata('sub_agent_user_id'));
         return $this->db->order_by('name_based_application_id', 'DESC');
     }

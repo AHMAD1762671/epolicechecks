@@ -81,7 +81,7 @@
 
                     <div class="col-md-3  form-group mb-3">
                         <label>Phone Number</label>
-                        <input type="password" class="form-control" name="password">
+                        <input type="number" class="form-control" name="password">
                         <div class="text-danger"><?= form_error('password'); ?></div>
                     </div>
 

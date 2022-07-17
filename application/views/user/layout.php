@@ -98,8 +98,9 @@
                     
                     <div class="dropdown">
                         <div class="user colalign-self-end">
-                            <img src="<?= base_url(get_user_picture_name_by_id($this->session->userdata('ind_user_id'))) ?>" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
+                        <img src="<?= base_url(get_user_picture_name_by_id($this->session->userdata('sub_agent_user_id'))) ?>" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                 <div class="dropdown-header">
                                     <i class="i-Lock-User mr-1"></i> <?= $this->session->userdata('ind_user_name') ?>
@@ -233,8 +234,8 @@
                     if($this->session->userdata('sub_agent_user_role_id') == 'f971e9f3-53z5-9206-a35d-1700188b'){
                     ?>
                     <ul class="navigation-left">
-                        <li class="nav-item <?= active_menu('user/dashboard') ?>">
-                            <a class="nav-item-hold" href="<?= base_url('user/dashboard') ?>">
+                        <li class="nav-item <?= active_menu('user/dashboard_pre') ?>">
+                            <a class="nav-item-hold" href="<?= base_url('user/dashboard_pre') ?>">
                                 <span class="nav-text"><span class="fa fa-chart-bar"></span> Dashboard</span>
                             </a>
                             <div class="triangle"></div>
@@ -262,7 +263,7 @@
                             <div class="triangle"></div>
                         </li>
 
-                        <li class="nav-item <?= active_menu('user/dashboard') ?>">
+                        <li class="nav-item <?= active_menu('user/agent_service_order') ?>">
                             <a class="nav-item-hold" href="<?= base_url() ?>user/agent_service_order">
                                 <span class="nav-text"><span class="fal fa-browser"></span> Service Order </span>
                             </a>
