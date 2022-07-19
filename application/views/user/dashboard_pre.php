@@ -76,7 +76,7 @@
                         <div class="card bg-gradient-info overflow-hidden text-white" style="background-image: linear-gradient(to bottom, #4a85fb 0, #163eaf 100%); box-shadow: 0 2px 10px rgb(22 62 175 / 30%);}">
                             <div class="card-body pb-0">
                                 <p style="font-size: 20px; text-align: center;" class=" mb-1 "><b>Active Applications</b></p>
-                                <p style="font-size: 55px; text-align: center;" class=" mb-1 "><b><?= $sub_agent_get_namebase+$sub_agent_fingerprinting?></b></p>
+                                <p style="font-size: 55px; text-align: center;" class=" mb-1 "><b><?= $sub_agent_get_namebase+$sub_agent_fingerprinting+$sub_agent_recordSuspension+$sub_agent_usEntry?></b></p>
                             </div>
                             <br>
                         </div>
@@ -90,7 +90,7 @@
                         <div class="card bg-gradient-info overflow-hidden text-white" style="background-image: linear-gradient(to bottom, #fc7a5a 0, #d72e04 100%); box-shadow: 0 2px 10px rgb(215 46 4 / 30%);">
                             <div class="card-body pb-0">
                                 <p style="font-size: 20px; text-align: center;" class=" mb-1 "><b>Completed Applications</b></p>
-                                <p style="font-size: 55px; text-align: center;" class=" mb-1 "><b><?= $sub_agent_completedget_namebase+$sub_agent_completedfingerprinting ?></b></p>
+                                <p style="font-size: 55px; text-align: center;" class=" mb-1 "><b><?= $sub_agent_completedget_namebase+$sub_agent_completedfingerprinting+$sub_agent_completedrecordSuspension+$sub_agent_completedusEntry ?></b></p>
                             </div>
                             <br>
                         </div>

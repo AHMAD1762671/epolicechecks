@@ -334,8 +334,8 @@ class User extends CI_Controller{
             $individual_user_id = $this->session->userdata('sub_agent_user_id');
             $data['get_namebase'] = $this->db->query("SELECT * FROM name_based_applications WHERE sub_agent_id = '$individual_user_id'" )->result();
             $data['fingerprinting'] = $this->db->query("SELECT * FROM digital_fingerprinting_applications WHERE sub_agent_id = '$individual_user_id'")->result();
-            $data['recordSuspension'] = $this->db->query("SELECT * FROM record_suspension_applications WHERE register_user_id = '$individual_user_id' ")->result();
-            $data['usEntry'] = $this->db->query("SELECT * FROM us_entry_waiver_applications WHERE register_user_id = '$individual_user_id' ")->result();
+            $data['recordSuspension'] = $this->db->query("SELECT * FROM record_suspension_applications WHERE sub_agent_id = '$individual_user_id' ")->result();
+            $data['usEntry'] = $this->db->query("SELECT * FROM us_entry_waiver_applications WHERE sub_agent_id = '$individual_user_id' ")->result();
         }
         $data['get_coupons'] = $this->db->where('user_email_id', $user_email)->get('coupons')->row();
 
@@ -366,13 +366,13 @@ class User extends CI_Controller{
         $one = 1;
         $data['sub_agent_get_namebase'] = $this->user_model->get_total_record('name_based_applications', $subagentwhereuser);
         $data['sub_agent_fingerprinting'] = $this->user_model->get_total_record('digital_fingerprinting_applications', $subagentwhereuser);
-       // $data['recordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $subagentwhereuser);
-       // $data['usEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $subagentwhereuser);
+        $data['sub_agent_recordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $subagentwhereuser);
+        $data['sub_agent_usEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $subagentwhereuser);
         $subagentwhere = array('sub_agent_id' => $sub_agent_id ,'application_completed' => $one);
         $data['sub_agent_completedget_namebase'] = $this->user_model->get_total_record('name_based_applications', $subagentwhere);
         $data['sub_agent_completedfingerprinting'] = $this->user_model->get_total_record('digital_fingerprinting_applications', $subagentwhere);
-        //$data['completedrecordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $subagentwhere);
-        //$data['completedusEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $subagentwhere);
+        $data['sub_agent_completedrecordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $subagentwhere);
+        $data['sub_agent_completedusEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $subagentwhere);
 
 
         $data['comments'] = $this->user_model->get_comments();

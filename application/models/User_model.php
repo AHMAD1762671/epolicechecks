@@ -338,8 +338,8 @@ class User_model extends CI_model{
         $this->db->from('record_suspension_applications');
         //$this->db->where('application_completed', 1);
 //        $this->db->where('agent_id', $this->session->userdata('agent_id'));
-        $this->db->where('register_user_id', $id);
-        return $this->db->order_by('record_suspension_id', 'DESC');
+        $this->db->where('sub_agent_id', $id);
+        return $this->db->order_by('record_suspension_id', 'ASC');
     }
 
     public function get_us_entry_waiver_applications($id) {
@@ -365,7 +365,7 @@ class User_model extends CI_model{
         $this->db->select('us_entry_waiver_applications.*');
         $this->db->from('us_entry_waiver_applications');
       //  $this->db->where('application_completed', 1);
-        $this->db->where('register_user_id', $id);
+        $this->db->where('sub_agent_id', $id);
 //        $this->db->where('agent_id', $this->session->userdata('agent_id'));
         return $this->db->order_by('us_entry_waiver_id', 'DESC');
     }
