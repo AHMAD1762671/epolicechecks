@@ -98,10 +98,25 @@
                     
                     <div class="dropdown">
                         <div class="user colalign-self-end">
-
-                        <img src="<?= base_url(get_user_picture_name_by_id($this->session->userdata('sub_agent_user_id'))) ?>" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <?php
+                        if($this->session->userdata('ind_user_role_id') == '3ee65tf9-7ed5-45ft-hdk1-f2afa31b'){
+                        ?>
+                            <img src="<?= base_url(get_user_picture_name_by_id($this->session->userdata('ind_user_id'))) ?>" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php }
+                        if($this->session->userdata('sub_corporate_user_role_id') == 'f971e9f3-57c9-9206-a35d-1700188b'){
+                        ?>
+                            <img src="<?= base_url(get_user_picture_name_by_id($this->session->userdata('sub_corporate_user_id'))) ?>" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php }
+                        if($this->session->userdata('sub_agent_user_role_id') == 'f971e9f3-53z5-9206-a35d-1700188b'){
+                        ?>
+                            <img src="<?= base_url(get_user_picture_name_by_id($this->session->userdata('sub_agent_user_id'))) ?>" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php } 
+                        if($this->session->userdata('outsider_user_role_id') == 'f971e9f3-98c9-9243-adrt-1700188b'){
+                        ?>    
+                            <img src="<?= base_url(get_user_picture_name_by_id($this->session->userdata('outsider_user_id'))) ?>" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php }
+                        ?>    
+                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                 <div class="dropdown-header">
                                     <i class="i-Lock-User mr-1"></i> <?= $this->session->userdata('ind_user_name') ?>
                                 </div>
