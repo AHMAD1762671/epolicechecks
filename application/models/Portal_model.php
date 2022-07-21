@@ -757,7 +757,7 @@ class Portal_model extends CI_model {
     }
 
     public function get_agent_name_by_id($agent_id) {
-        $result = $this->db->where('id', $agent_id)->get('agents')->row();
+        $result = $this->db->where('user_role_id', $agent_id)->get('users')->row();
         if ($result) {
             return $result->first_name . ' ' . $result->last_name;
         } else {
@@ -766,7 +766,7 @@ class Portal_model extends CI_model {
     }
 
     public function get_corporate_name_by_id($corporate_id) {
-        $result = $this->db->where('id', $corporate_id)->get('corporates')->row();
+        $result = $this->db->where('user_role_id', $corporate_id)->get('users')->row();
         if ($result) {
             return $result->first_name . ' ' . $result->last_name;
         } else {
