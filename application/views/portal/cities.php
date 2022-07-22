@@ -144,19 +144,20 @@
                                 </div>
                                 <div class="col-md-12 form-group mb-3">
                                     <label>Country</label>
-                                    <select class="form-control select2-country-ajax" required="" name="country_id" value="<?= set_value('country_id') ?>">
+                                    <select class="form-control"  name="country" id="country">
                                         <option value="">Select Country</option>
                                         <?php foreach ($countries as $st) { ?>
                                             <option value="<?= $st->country_id ?>"><?= $st->name ?></option>
                                         <?php } ?>
                                     </select>
-                                    <div class="text-danger"><?= form_error('country_id'); ?></div>
-
+                                    <div class="text-danger"><?= form_error('country'); ?></div>
                                 </div>
+
                                 <div class="col-md-12 form-group mb-3">
-                                    <label>State</label>
-                                    <select class="form-control select2 loaded-states" required="" name="state_id" value="<?= set_value('state_id') ?>"></select>
-                                    <div class="text-danger"><?= form_error('state_id'); ?></div>
+                                    <label>Province</label>
+                                    <select class="form-control" name="state_id" id="province">
+                                        <option value="">Select State</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-12 form-group mb-3">
                                     <label class="switch switch-primary mr-3">
@@ -178,6 +179,51 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function(){
+        $('#country').change(function(){
+            var country_id = $('#country').val();
+            if(country_id != '')
+            {
+                $.ajax({
+                    url:"<?php echo base_url(); ?>portal/fetch_state",
+                    method:"POST",
+                    data:{country_id:country_id},
+                    success:function(data)
+                    {
+                        $('#province').html(data);
+                        $('#city').html('<option value="">Select City</option>');
+                    }
+                });
+            }
+            else
+            {
+                $('#province').html('<option value="">Select State</option>');
+                $('#city').html('<option value="">Select City</option>');
+            }
+        });
+        $('#province').change(function(){
+            var state_id = $('#province').val();
+
+            if(state_id != '')
+            {
+                $.ajax({
+                    url:"<?php echo base_url(); ?>portal/fetch_city",
+                    method:"POST",
+                    data:{state_id:state_id},
+                    success:function(data)
+                    {
+                        $('#city').html(data);
+                    }
+                });
+            }
+            else
+            {
+                $('#City').html('<option value="">Select City</option>');
+            }
+        });
+    });
+</script>
 <script>
     $(document).ready(function () {
         $('.delete-city').click(function () {

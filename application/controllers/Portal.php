@@ -325,7 +325,7 @@ class Portal extends CI_Controller {
                 $this->session->set_userdata($userdata);
                 redirect('portal/dashboard');
             } else {
-                $this->session->set_tempdata('no_user_access', 'Invalid Email / Password.');
+                $this->session->set_tempdata('no_user_access', 'Invalid Email / Password.',3);
                 redirect('portal');
             }
         }
@@ -362,10 +362,10 @@ class Portal extends CI_Controller {
             $this->email->subject('ePolice Reset Password Request');
             $this->email->message($htmlContent);
             $this->email->send();
-            $this->session->set_tempdata('signup_success', 'Reset password link has been sent. Check your inbox.');
+            $this->session->set_tempdata('signup_success', 'Reset password link has been sent. Check your inbox.',3);
             redirect('portal/forgot-password');
         } else {
-            $this->session->set_tempdata('no_user_access', 'Invalid Email! Please try again.');
+            $this->session->set_tempdata('no_user_access', 'Invalid Email! Please try again.',3);
             redirect('portal/forgot-password');
         }
     }
@@ -394,10 +394,10 @@ class Portal extends CI_Controller {
             $this->load->view('portal/reset_password_view', $data);
         } else {
             if ($this->portal_model->user_reset_password($code)) {
-                $this->session->set_tempdata('signup_success', 'Password changed successfully!');
+                $this->session->set_tempdata('signup_success', 'Password changed successfully!',3);
                 redirect('portal');
             } else {
-                $this->session->set_tempdata('no_user_access', 'Something went wrong! Please try again.');
+                $this->session->set_tempdata('no_user_access', 'Something went wrong! Please try again.',3);
                 redirect('portal/reset-password/' . $code);
             }
         }
@@ -427,11 +427,11 @@ class Portal extends CI_Controller {
             $this->load->view('portal/layout', $data);
         } else {
             if ($this->portal_model->user_account_update($is_password)) {
-                $this->session->set_tempdata('success_message', 'Account updated successfully!');
+                $this->session->set_tempdata('success_message', 'Account updated successfully!',3);
                 redirect('portal/account');
             } else {
                 $data['account'] = $this->db->where('id', $this->session->userdata('user_id'))->get('users')->row();
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 $this->load->view('portal/layout', $data);
             }
         }
@@ -473,14 +473,14 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('user_permission_url', 'URL', 'trim|required');
         $this->form_validation->set_rules('user_permission_type', 'Type', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/user-permissions');
         } else {
             if ($this->portal_model->add_user_permission_save()) {
-                $this->session->set_tempdata('success_message', 'User Permission added successfully.');
+                $this->session->set_tempdata('success_message', 'User Permission added successfully.',3);
                 redirect('portal/user-permissions');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/user-permissions');
             }
         }
@@ -492,14 +492,14 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('user_permission_url', 'URL', 'trim|required');
         $this->form_validation->set_rules('user_permission_type', 'Type', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/user-permissions');
         } else {
             if ($this->portal_model->edit_user_permission_save()) {
-                $this->session->set_tempdata('success_message', 'User Permission updated successfully.');
+                $this->session->set_tempdata('success_message', 'User Permission updated successfully.',3);
                 redirect('portal/user-permissions');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/user-permissions');
             }
         }
@@ -519,14 +519,14 @@ class Portal extends CI_Controller {
     public function add_user_role_save() {
         $this->form_validation->set_rules('user_role_name', 'User Role Name', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/user-roles');
         } else {
             if ($this->portal_model->add_user_role_save()) {
-                $this->session->set_tempdata('success_message', 'User Role added successfully.');
+                $this->session->set_tempdata('success_message', 'User Role added successfully.',3);
                 redirect('portal/user-roles');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/user-roles');
             }
         }
@@ -535,14 +535,14 @@ class Portal extends CI_Controller {
     public function edit_user_role_save() {
         $this->form_validation->set_rules('user_role_name', 'User Role Name', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/user-roles');
         } else {
             if ($this->portal_model->edit_user_role_save()) {
-                $this->session->set_tempdata('success_message', 'User Role updated successfully.');
+                $this->session->set_tempdata('success_message', 'User Role updated successfully.',3);
                 redirect('portal/user-roles');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/user-roles');
             }
         }
@@ -567,10 +567,10 @@ class Portal extends CI_Controller {
 
     public function add_user_roles_permissions_save() {
         if ($this->portal_model->add_user_roles_permissions_save()) {
-            $this->session->set_tempdata('success_message', 'User Role\'s Permissions assigned successfully.');
+            $this->session->set_tempdata('success_message', 'User Role\'s Permissions assigned successfully.',3);
             redirect('portal/user-roles');
         } else {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/user-roles');
         }
     }
@@ -609,16 +609,16 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('password', 'Email', 'trim|required|min_length[8]');
         $this->form_validation->set_rules('user_role_id', 'User Role', 'trim|required');
         if (!$this->form_validation->run()) {
-           $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-           $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!');
+           $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+           $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!',3);
            $this->users_list();
         }
         else {
             if ($this->portal_model->add_user_save()) {
-                $this->session->set_tempdata('success_message', 'User added successfully.');
+                $this->session->set_tempdata('success_message', 'User added successfully.',3);
                 redirect('portal/users');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/users');
             }
         }
@@ -630,16 +630,16 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
         $this->form_validation->set_rules('user_role_id', 'User Role', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!',3);
 //            redirect('portal/users');
             $this->users_list();
         } else {
             if ($this->portal_model->edit_user_save()) {
-                $this->session->set_tempdata('success_message', 'User updated successfully.');
+                $this->session->set_tempdata('success_message', 'User updated successfully.',3);
                 redirect('portal/users');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/users');
             }
         }
@@ -662,7 +662,7 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('name', 'Country Name', 'trim|required');
 //        $this->form_validation->set_rules('phonecode', 'Phone Code', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/countries');
         } else {
             if ($this->portal_model->add_country_save()) {
@@ -681,10 +681,10 @@ class Portal extends CI_Controller {
 //                save the record for notification
 //                $submitResult = $this->portal_model->save_notification($data);
 
-                $this->session->set_tempdata('success_message', 'Country added successfully.');
+                $this->session->set_tempdata('success_message', 'Country added successfully.',3);
                 redirect('portal/countries');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/countries');
             }
         }
@@ -694,7 +694,7 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('name', 'Country Name', 'trim|required');
         $this->form_validation->set_rules('phonecode', 'Phone Code', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/countries');
         } else {
             if ($this->portal_model->edit_country_save()) {
@@ -751,14 +751,14 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('tax_type', 'Tax Type', 'trim|required');
         $this->form_validation->set_rules('tax_rate', 'Tax Rate %', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/states');
         } else {
             if ($this->portal_model->add_state_save()) {
-                $this->session->set_tempdata('success_message', 'State added successfully.');
+                $this->session->set_tempdata('success_message', 'State added successfully.',3);
                 redirect('portal/states');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/states');
             }
         }
@@ -770,14 +770,14 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('tax_type', 'Tax Type', 'trim|required');
         $this->form_validation->set_rules('tax_rate', 'Tax Rate %', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/states');
         } else {
             if ($this->portal_model->edit_state_save()) {
-                $this->session->set_tempdata('success_message', 'State updated successfully.');
+                $this->session->set_tempdata('success_message', 'State updated successfully.',3);
                 redirect('portal/states');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/states');
             }
         }
@@ -809,14 +809,14 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('country_id', 'Country', 'trim|required');
         $this->form_validation->set_rules('state_id', 'Country', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/cities');
         } else {
             if ($this->portal_model->add_city_save()) {
-                $this->session->set_tempdata('success_message', 'City added successfully.');
+                $this->session->set_tempdata('success_message', 'City added successfully.',3);
                 redirect('portal/cities');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/cities');
             }
         }
@@ -827,14 +827,14 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('country_id', 'Country', 'trim|required');
         $this->form_validation->set_rules('state_id', 'Country', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/cities');
         } else {
             if ($this->portal_model->edit_city_save()) {
-                $this->session->set_tempdata('success_message', 'City updated successfully.');
+                $this->session->set_tempdata('success_message', 'City updated successfully.',3);
                 redirect('portal/cities');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/cities');
             }
         }
@@ -876,10 +876,10 @@ class Portal extends CI_Controller {
 
     public function add_location_save() {
         if ($this->portal_model->add_location_save()) {
-            $this->session->set_tempdata('success_message', 'Location added successfully.');
+            $this->session->set_tempdata('success_message', 'Location added successfully.',3);
             redirect('portal/locations_list');
         } else {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/locations_list');
         }
     }
@@ -889,14 +889,14 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('country_id', 'Country', 'trim|required');
         $this->form_validation->set_rules('state_id', 'Country', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/locations_list');
         } else {
             if ($this->portal_model->edit_location_save()) {
-                $this->session->set_tempdata('success_message', 'Location updated successfully.');
+                $this->session->set_tempdata('success_message', 'Location updated successfully.',3);
                 redirect('portal/locations_list');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/locations_list');
             }
         }
@@ -940,13 +940,13 @@ class Portal extends CI_Controller {
         $this->upload->initialize($config);
 
         if (!$this->upload->do_upload('office_desk_file')) {
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/office-desk');
         }
         if ($this->portal_model->add_office_desk_document($filename)) {
-            $this->session->set_tempdata('success_message', 'Document is added successfully.');
+            $this->session->set_tempdata('success_message', 'Document is added successfully.',3);
         } else {
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
         }
         redirect('portal/office-desk');
     }
@@ -954,14 +954,14 @@ class Portal extends CI_Controller {
     public function edit_office_desk_save() {
         $this->form_validation->set_rules('office_desk_name', 'Document Name', 'trim|required');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/office-desk');
         } else {
             if ($this->portal_model->edit_office_desk_save()) {
-                $this->session->set_tempdata('success_message', 'Document updated successfully.');
+                $this->session->set_tempdata('success_message', 'Document updated successfully.',3);
                 redirect('portal/office-desk');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/office-desk');
             }
         }
@@ -1384,17 +1384,17 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('city_id', 'City', 'trim|required');
         $this->form_validation->set_rules('address', 'Address', 'trim|required');
 //        if (!$this->form_validation->run()) {
-//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!');
+//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!',3);
 //            $this->agents_list();
 //        } else {
 //        $this->portal_model->add_agent_save();
 //        die();
         if ($this->portal_model->add_agent_save()) {
-            $this->session->set_tempdata('success_message', 'Agent added successfully.');
+            $this->session->set_tempdata('success_message', 'Agent added successfully.',3);
             redirect('portal/agents');
         } else {
-            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!',3);
             redirect('portal/agents');
         }
 //        }
@@ -1409,16 +1409,16 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('city_id', 'City', 'trim|required');
         $this->form_validation->set_rules('address', 'Address', 'trim|required');
 //        if (!$this->form_validation->run()) {
-//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-//            $this->session->set_tempdata('add_agent_error', 'Something went wrong. Please try again!');
+//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+//            $this->session->set_tempdata('add_agent_error', 'Something went wrong. Please try again!',3);
 ////            redirect('portal/users');
 //            $this->agents_list();
 //        } else {
         if ($this->portal_model->edit_agent_save()) {
-            $this->session->set_tempdata('success_message', 'Agent updated successfully.');
+            $this->session->set_tempdata('success_message', 'Agent updated successfully.',3);
             redirect('portal/agents');
         } else {
-            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!',3);
             redirect('portal/agents');
         }
 //        }
@@ -1483,16 +1483,16 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[users.email]');
         $this->form_validation->set_rules('password', 'Email', 'trim|required|min_length[8]');
 //        if (!$this->form_validation->run()) {
-//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!');
+//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!',3);
 //            $this->corporates_list();
 //        } else {
 //        $this->portal_model->add_corporate_save(); die();
         if ($this->portal_model->add_corporate_save()) {
-            $this->session->set_tempdata('success_message', 'Corporate added successfully.');
+            $this->session->set_tempdata('success_message', 'Corporate added successfully.',3);
             redirect('portal/corporates');
         } else {
-            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!',3);
             redirect('portal/corporates');
         }
 //        }
@@ -1504,16 +1504,16 @@ class Portal extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[users.email]');
         $this->form_validation->set_rules('password', 'Email', 'trim|required|min_length[8]');
 //        if (!$this->form_validation->run()) {
-//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!');
+//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!',3);
 //            $this->corporates_list();
 //        } else {
 //        $this->portal_model->add_corporate_save(); die();
         if ($this->portal_model->add_reseller_save()) {
-            $this->session->set_tempdata('success_message', 'reseller added successfully.');
+            $this->session->set_tempdata('success_message', 'reseller added successfully.',3);
             redirect('portal/reseller_list');
         } else {
-            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!',3);
             redirect('portal/reseller_list');
         }
 //        }
@@ -1525,16 +1525,16 @@ class Portal extends CI_Controller {
 //        $this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[users.email]');
 //        $this->form_validation->set_rules('password', 'Email', 'trim|required|min_length[8]');
         if (!$this->form_validation->run()) {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!',3);
 //            redirect('portal/users');
             $this->corporates_list();
         } else {
             if ($this->portal_model->edit_corporate_save()) {
-                $this->session->set_tempdata('success_message', 'Corporate updated successfully.');
+                $this->session->set_tempdata('success_message', 'Corporate updated successfully.',3);
                 redirect('portal/corporates');
             } else {
-                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+                $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
                 redirect('portal/corporates');
             }
         }
@@ -1565,10 +1565,10 @@ class Portal extends CI_Controller {
             );
             $submitResult = $this->portal_model->save_notification($data);
 
-            $this->session->set_tempdata('success_message', 'Application status updated successfully.');
+            $this->session->set_tempdata('success_message', 'Application status updated successfully.',3);
             redirect('portal/security-screening/name-based-check');
         } else {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/security-screening/name-based-check');
         }
     }
@@ -1596,7 +1596,7 @@ class Portal extends CI_Controller {
         $this->upload->initialize($config);
 
         if (!$this->upload->do_upload('office_desk_file')) {
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/name_based_check_applications');
         }
         if ($this->portal_model->upload_certificate($filename, $id)) {
@@ -1613,9 +1613,9 @@ class Portal extends CI_Controller {
             );
             $submitResult = $this->portal_model->save_notification($data);
 
-            $this->session->set_tempdata('success_message', 'Document is added successfully.');
+            $this->session->set_tempdata('success_message', 'Document is added successfully.',3);
         } else {
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
         }
         redirect('portal/name_based_check_applications');
     }
@@ -1666,7 +1666,7 @@ class Portal extends CI_Controller {
         $id = $this->input->post('application_id');
 
         if (!$this->upload->do_upload('office_desk_file')) {
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
 
@@ -1684,9 +1684,9 @@ class Portal extends CI_Controller {
             $submitResult = $this->portal_model->save_notification($data);
             //            end notification entry
 
-            $this->session->set_tempdata('success_message', 'Document is added successfully.');
+            $this->session->set_tempdata('success_message', 'Document is added successfully.',3);
         } else {
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
         }
         redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
     }
@@ -1701,10 +1701,10 @@ class Portal extends CI_Controller {
         $save_data = $this->portal_model->forward_application_to_user($data);
 
         if ($save_data) {
-            $this->session->set_temdata('success_message', 'Application forwarded successfully.');
+            $this->session->set_tempdata('success_message', 'Application forwarded successfully.',3);
             redirect('portal/security-screening/name-based-check');
         } else {
-            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!',3);
             redirect('portal/security-screening/name-based-check');
         }
     }
@@ -1720,10 +1720,10 @@ class Portal extends CI_Controller {
         $save_data = $this->portal_model->forward_application_to_user($data);
 
         if ($save_data) {
-            $this->session->set_tempdata('success_message', 'Application forwarded successfully.');
+            $this->session->set_tempdata('success_message', 'Application forwarded successfully.',3);
             redirect('portal/security-screening/us-entry-waiver');
         } else {
-            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!',3);
             redirect('portal/security-screening/us-entry-waiver');
         }
     }
@@ -1768,7 +1768,7 @@ class Portal extends CI_Controller {
         $this->upload->initialize($config);
         $id = $this->input->post('application_id');
         if (!$this->upload->do_upload('office_desk_file')) {
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
         if ($this->portal_model->update_certificate_of_us_entry_waiver_application($filename, $id)) {
@@ -1785,9 +1785,9 @@ class Portal extends CI_Controller {
             $submitResult = $this->portal_model->save_notification($data);
 //                        end notification entry
 
-            $this->session->set_tempdata('success_message', 'Document is added successfully.');
+            $this->session->set_tempdata('success_message', 'Document is added successfully.',3);
         } else {
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
         }
         redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
     }
@@ -1796,11 +1796,11 @@ class Portal extends CI_Controller {
         $application_id = $this->input->post('application_id');
         $table_name = $this->input->post('table_name');
         if($this->portal_model->delete_certificate($application_id, $table_name)){
-            $this->session->set_tempdata('success_message', 'Document is added successfully.');
+            $this->session->set_tempdata('success_message', 'Document is added successfully.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
         else{
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
     }
@@ -1809,11 +1809,11 @@ class Portal extends CI_Controller {
         $application_id = $this->input->post('application_id');
         $table_name = $this->input->post('table_name');
         if($this->portal_model->delete_certificate_namebase($application_id, $table_name)){
-            $this->session->set_tempdata('success_message', 'Document is added successfully.');
+            $this->session->set_tempdata('success_message', 'Document is added successfully.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
         else{
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
     }
@@ -1822,11 +1822,11 @@ class Portal extends CI_Controller {
         $application_id = $this->input->post('application_id');
         $table_name = $this->input->post('table_name');
         if($this->portal_model->delete_certificate_digital($application_id, $table_name)){
-            $this->session->set_tempdata('success_message', 'Document is added successfully.');
+            $this->session->set_tempdata('success_message', 'Document is added successfully.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
         else{
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
     }
@@ -1835,11 +1835,11 @@ class Portal extends CI_Controller {
         $application_id = $this->input->post('application_id');
         $table_name = $this->input->post('table_name');
         if($this->portal_model->delete_certificate_record_suspensio($application_id, $table_name)){
-            $this->session->set_tempdata('success_message', 'Document is added successfully.');
+            $this->session->set_tempdata('success_message', 'Document is added successfully.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
         else{
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/security-screening/' . $this->input->post('type') . '/details/' . $this->input->post('application_id') . '#comments');
         }
     }
@@ -1849,11 +1849,11 @@ class Portal extends CI_Controller {
         $status = $this->input->post('status');
 //        echo $id . $status; die();
         if($this->portal_model->change_agent_status($status, $id)){
-            $this->session->set_tempdata('success_message', 'Status Update Successfully.');
+            $this->session->set_tempdata('success_message', 'Status Update Successfully.',3);
             redirect('portal/agents/');
         }
         else{
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/agents/');
         }
     }
@@ -1977,11 +1977,11 @@ class Portal extends CI_Controller {
         $id = $this->input->post('id');
         $status = $this->input->post('status');
         if($this->portal_model->change_corporate_status($status, $id)){
-            $this->session->set_tempdata('success_message', 'Status Update Successfully.');
+            $this->session->set_tempdata('success_message', 'Status Update Successfully.',3);
             redirect('portal/corporates/');
         }
         else{
-            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.');
+            $this->session->set_tempdata('no_access', 'Something went wrong! Please try again.',3);
             redirect('portal/corporates/');
         }
     }
@@ -2005,10 +2005,10 @@ class Portal extends CI_Controller {
         $update_data = $this->portal_model->forward_service_order_images_to_reception($reception_id, $picture_id);
 
         if ($update_data) {
-            $this->session->set_tempdata('success_message', 'Application forwarded successfully.');
+            $this->session->set_tempdata('success_message', 'Application forwarded successfully.',3);
             redirect('portal/view_service_order_images');
         } else {
-            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!',3);
             redirect('portal/view_service_order_images');
         }
     }
@@ -2038,19 +2038,19 @@ class Portal extends CI_Controller {
 //        $this->form_validation->set_rules('password', 'Email', 'trim|required|min_length[8]');
 //        $this->form_validation->set_rules('user_role_id', 'User Role', 'trim|required');
 //        if (!$this->form_validation->run()) {
-//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!');
+//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!',3);
 //            redirect('portal/users');
 //            $this->users_list();
 //        } else {
         if (!$this->portal_model->add_corporate_coupon_save()) {
-            $this->session->set_tempdata('success_message', 'Coupon added successfully.');
+            $this->session->set_tempdata('success_message', 'Coupon added successfully.',3);
             redirect('portal/coupons');
         } else {
 
 //<!--                <div class="alert alert-danger">-->
 //
-            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!',3);
             redirect('portal/coupons');
         }
 //        }
@@ -2064,16 +2064,16 @@ class Portal extends CI_Controller {
 //        $this->form_validation->set_rules('password', 'Email', 'trim|required|min_length[8]');
 //        $this->form_validation->set_rules('user_role_id', 'User Role', 'trim|required');
 //        if (!$this->form_validation->run()) {
-//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!');
+//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!',3);
 //            redirect('portal/users');
 //            $this->users_list();
 //        } else {
         if ($this->portal_model->add_agent_coupon_save()) {
-            $this->session->set_tempdata('success_message', 'Coupon added successfully.');
+            $this->session->set_tempdata('success_message', 'Coupon added successfully.',3);
             redirect('portal/coupons');
         } else {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/coupons');
         }
 //        }
@@ -2086,16 +2086,16 @@ class Portal extends CI_Controller {
 //        $this->form_validation->set_rules('password', 'Email', 'trim|required|min_length[8]');
 //        $this->form_validation->set_rules('user_role_id', 'User Role', 'trim|required');
 //        if (!$this->form_validation->run()) {
-//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
-//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!');
+//            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+//            $this->session->set_tempdata('add_user_error', 'Something went wrong. Please try again!',3);
 //            redirect('portal/users');
 //            $this->users_list();
 //        } else {
         if ($this->portal_model->add_outsider_user_coupon_save()) {
-            $this->session->set_tempdata('success_message', 'Coupon added successfully.');
+            $this->session->set_tempdata('success_message', 'Coupon added successfully.',3);
             redirect('portal/coupons');
         } else {
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/coupons');
         }
 //        }
@@ -2275,6 +2275,7 @@ class Portal extends CI_Controller {
     public function individual_invoice_list(){
 
     }
+
 
     public function payment(){
         $data['page_title'] = "Payment";
@@ -3091,11 +3092,11 @@ class Portal extends CI_Controller {
         $save_data = $this->portal_model->save_custom_invoice($data);
 
         if($save_data){
-            $this->session->set_tempdata('success_message', 'Invoice added successfully.');
+            $this->session->set_tempdata('success_message', 'Invoice added successfully.',3);
             redirect('portal/add_new_invoice');
         }
         else{
-            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!');
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
             redirect('portal/add_new_invoice');
         }
     }

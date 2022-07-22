@@ -222,24 +222,21 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
+
                         <div class="modal-body">
-                            <div class="row">
-
-                                <div class="col-md-12 form-group mb-3">
-                                    <label>User Role</label>
-                                    <select class="form-control" required="" name="user_role_id" value="<?= set_value('user_role_id') ?>">
-                                        <option value="">Select User Role</option>
-                                        <?php foreach ($user_roles as $value) { ?>
-                                            <option value="<?= $value->user_role_id ?>"><?= $value->user_role_name ?></option>
-                                        <?php }
-                                        ?>
-                                    </select>
-                                    <div class="text-danger"><?= form_error('user_role_id'); ?></div>
-                                </div>
-
-
-                                <div class="modal-body">
                                     <div class="row">
+                                        
+                                        <div class="col-md-12 form-group mb-3">
+                                            <label>User Role</label>
+                                            <select class="form-control" required="" name="user_role_id" value="<?= set_value('user_role_id') ?>">
+                                                <option value="">Select User Role</option>
+                                                <?php foreach ($user_roles as $value) { ?>
+                                                    <option value="<?= $value->user_role_id ?>"><?= $value->user_role_name ?></option>
+                                                <?php }
+                                                ?>
+                                            </select>
+                                            <div class="text-danger"><?= form_error('user_role_id'); ?></div>
+                                        </div>                                        
                                         <div class="col-md-6 form-group mb-3">
                                             <label>Email</label>
                                             <input type="text" class="form-control" required="" name="email" value="<?= set_value('email') ?>">
@@ -340,22 +337,11 @@
                                             <div class="text-danger"><?= form_error('comments'); ?></div>
                                         </div>
                                     </div>
-                                </div>
-
-
-
-
-
-
-
-
-
+                                </div>                                
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Add User</button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add User</button>
-                        </div>
                     </form>
                 </div>
             </div>

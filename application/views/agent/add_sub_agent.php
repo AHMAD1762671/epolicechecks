@@ -73,7 +73,7 @@
                                             <div class="col-md-4 form-group mb-3">
                                                 <label>Country</label>
                                                 <select class="form-control" name="country" id="country">
-                                                    <option value="">Select Countr</option>
+                                                    <option value="">Select Country</option>
                                                     <?php
                                                     foreach($countries as $st)
                                                     {

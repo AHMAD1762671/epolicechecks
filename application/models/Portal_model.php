@@ -377,7 +377,7 @@ class Portal_model extends CI_model {
     }
 
     public function get_all_cities() {
-        $this->db->where('states.active', 1);
+        $this->db->where('states.active', );
         $this->db->where('countries.active', 1);
         if ($this->input->get('name')) {
             $this->db->like('cities.name', $this->input->get('name'));
