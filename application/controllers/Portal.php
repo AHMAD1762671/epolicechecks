@@ -1140,7 +1140,8 @@ class Portal extends CI_Controller {
         $data['application'] = $this->portal_model->get_name_based_application_details($application_id);
         $data['services'] = $this->portal_model->get_name_based_application_services($application_id);
         $data['offences'] = $this->portal_model->get_name_based_application_offences($application_id);
-        $html = $this->load->view('portal/name_based_check_application_download', $data, true);
+        // $html =
+         $this->load->view('portal/name_based_check_application_download', $data, true);
         $filename = 'Name Based Check Application - ' . $application_id;
         $this->pdfgenerator->generate($html, $filename, true, 'A4', 'portrait');
     }
@@ -1265,7 +1266,8 @@ class Portal extends CI_Controller {
         $data['application'] = $this->portal_model->get_record_suspension_application_details($application_id);
         $data['services'] = $this->portal_model->get_record_suspension_application_services($application_id);
         $data['offences'] = $this->portal_model->get_record_suspension_application_offences($application_id);
-        $html = $this->load->view('portal/record_suspension_application_download', $data, true);
+        //$html = 
+        $this->load->view('portal/record_suspension_application_download', $data, true);
         $filename = 'Record Suspension Application - ' . $application_id;
         $this->pdfgenerator->generate($html, $filename, true, 'A4', 'portrait');
     }

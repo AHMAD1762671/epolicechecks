@@ -315,7 +315,7 @@
                 <div class="modal-content">
                     <form action="<?= base_url('portal/add-corporate') ?>" method="post">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add Corporate</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
