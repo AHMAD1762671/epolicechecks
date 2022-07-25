@@ -264,7 +264,7 @@
 
             <div class="mb-4 col-md-4 col-lg-3 col-sm-6">
                 <h5 class="mb-1 text-theme">Applicant Signature</h5>
-                <span><img height="100px" width="200px" style="margin-top: 10%;" src="<?php echo base_url().'upload/applicant_signatures/'.$application->consent_signature_drawable ?>"></span>
+                <span><img height="100px" width="200px" style="margin-top: 10%;" src="<?php echo base_url().'uploads/applicant_signatures/'.$application->consent_signature_drawable?>" alt="Signature Drawable"></span>
             </div>
         </div>
         <?php foreach ($offences as $value) { ?>
@@ -289,44 +289,44 @@
 
         <h4 class="text-theme"><span class="fa fa-user text-16 mr-1"></span> Identification Verification</h4>
 <!--        <input type="checkbox" class="le-checkbox">	Electronic Identity Verification-->
-        <br/>
+        <br>
 
-        <?php if($value->verification_status = "verified"){ ?>
-        <?php if($value->verified_by = "agent"){ ?>
+        <?php if($value->verification_status == "verified"){ ?>
+            <?php if($value->verified_by == "agent"){ ?>
+
+                <div class="row">
+                    <div class="mb-4 col-md-4 col-lg-3 col-sm-6">
+                        <h5 class="mb-1 text-theme"><input type="checkbox" class="le-checkbox"> &nbsp;	 &nbsp;	&nbsp;	Electronic Identity Verification</h5>
+                    </div>
+                </div>
+            <br>
 
             <div class="row">
-                <div class="mb-4 col-md-4 col-lg-3 col-sm-6">
-                    <h5 class="mb-1 text-theme"><input type="checkbox" class="le-checkbox"> &nbsp;	 &nbsp;	&nbsp;	Electronic Identity Verification</h5>
+
+                <div class="mb-4 col-md-4 col-lg-6 col-sm-6">
+                    <h5 class="" style="color: red;">1. Which of the following is your middle or former name?</h5>
+                </div>
+
+
+
+                <div class="mb-4 col-md-4 col-lg-6 col-sm-6">
+                    <h5 class="" style="color: green;">2. Which of the following is currently or has been in the past one of your phone numbers?</h5>
                 </div>
             </div>
-            <br/>
-
-        <div class="row">
-
-            <div class="mb-4 col-md-4 col-lg-6 col-sm-6">
-                 <h5 class="" style="color: red;">1. Which of the following is your middle or former name?</h5>
-            </div>
-
-
-
-            <div class="mb-4 col-md-4 col-lg-6 col-sm-6">
-                 <h5 class="" style="color: green;">2. Which of the following is currently or has been in the past one of your phone numbers?</h5>
-            </div>
-        </div>
 
             <div class="row">
-            <div class="mb-4 col-md-4 col-lg-6 col-sm-6">
-                 <h5 class="" style="color: red;">3. Identify your business line extension in the following list?</h5>
+                <div class="mb-4 col-md-4 col-lg-6 col-sm-6">
+                    <h5 class="" style="color: red;">3. Identify your business line extension in the following list?</h5>
+                </div>
+
+
+                <div class="mb-4 col-md-4 col-lg-6 col-sm-6">
+                    <h5 class="" style="color: green;"> 4. Which of the following is your age today?</h5>
+                </div>
             </div>
 
 
-            <div class="mb-4 col-md-4 col-lg-6 col-sm-6">
-                 <h5 class="" style="color: green;"> 4. Which of the following is your age today?</h5>
-            </div>
-        </div>
-
-
-        <?php } elseif($value->verified_by = "aquafex"){  ?>
+            <?php } elseif($value->verified_by = "aquafex"){  ?>
 
             <div class="row">
                 <div class="mb-4 col-md-4 col-lg-3 col-sm-6">
@@ -347,9 +347,9 @@
                 </div>
             </div>
 
-            <?php } ?>
+        <?php } ?>
 
-        <hr/>
+        <hr>
 
 
 

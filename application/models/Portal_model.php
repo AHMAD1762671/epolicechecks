@@ -674,7 +674,7 @@ class Portal_model extends CI_model {
 
     public function get_record_suspension_application_details($application_id) {
         $this->db->where('record_suspension_id', $application_id);
-        $this->db->where('application_completed', 1);
+        //$this->db->where('application_completed', 1);
         return $this->db->get('record_suspension_applications')->row();
     }
 
