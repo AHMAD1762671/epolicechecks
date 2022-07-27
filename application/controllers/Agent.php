@@ -27,7 +27,7 @@ class Agent extends CI_Controller {
             'agent/app_name_based_check_form',
             'agent/message',
             'agent/digital_fingerprint_form',
-            'agent/app_record_suspension_form',
+            'agent/app_record_suspension',
             'agent/app_us_entry_waiver_form',
             'agent/messages_alert',
             'agent/account_save',
@@ -304,12 +304,12 @@ class Agent extends CI_Controller {
 
 //    1st form of namebased application
     public function app_name_based_check_form() {
-//         $data["page_title"] = "Name Based Check " . strtoupper($country);
-//        $data['service'] = $this->db->where('service_slug', 'name-based-check')->get('services')->row();
-//        $data['sub_services'] = $this->db->where('service_id', $data['service']->service_id)->order_by('created_at', 'ASC')->get('subservices')->result();
-//        $data['delivery_methods'] = $this->db->order_by('created_at', 'ASC')->get('delivery_methods')->result();
-        // $data["states"] = $this->agent_model->get_states('Canada');
-        // $data['country'] = $country;
+        $data["page_title"] = "Name Based Check " . strtoupper($country);
+        $data['service'] = $this->db->where('service_slug', 'name-based-check')->get('services')->row();
+        $data['sub_services'] = $this->db->where('service_id', $data['service']->service_id)->order_by('created_at', 'ASC')->get('subservices')->result();
+        $data['delivery_methods'] = $this->db->order_by('created_at', 'ASC')->get('delivery_methods')->result();
+        $data["states"] = $this->agent_model->get_states('Canada');
+        $data['country'] = $country;
 //        $data['main_view'] = "agent/site/name_based_check_form";
 //        $this->load->view('agent/site/name_based_check_form', $data);
         $this->load->view('agent/site/name_based_check_form', $data);
@@ -318,25 +318,40 @@ class Agent extends CI_Controller {
 //    2nd form of namebased application
     public function app_name_based_check_consent() {
         $data["page_title"] = "Consent Form - Name Based Criminal Record Check";
-//        $data["application_id"] = $application_id;
+        $data["application_id"] = $this->uri->segment('3');
 //        $data["client_id"] = $client_id;
 
-        $data["states"] = $this->agent_model->get_states('Canada');
+        // $data["states"] = $this->agent_model->get_states('Canada');
         $this->load->view('agent/site/name_based_check_consent', $data);
     }
 
+    //    save namebased application
+    public function app_name_based_check_form_save() {
+        if ($application_id = $this->agent_model->name_based_check_form_save()) {
+            redirect('agent/app_name_based_check_consent'. '/' . $application_id);
+        }
+        redirect('app_name_based_check_form');
+    }
 
 //    Save the record step form first
     public function app_name_based_check_consent_save() {
-        $signature = $this->input->post('signature');
+        if ($this->agent_model->name_based_check_consent_save()) {
+            $this->session->set_tempdata('success_message', 'Application Added Successfully.',3);
+            redirect('agent/name_based_check_applications');
+        }
+        else{
+            $this->session->set_tempdata('error_message', 'Something went wrong. Please try again!',3);
+            redirect('agent/name_based_check_applications');
+        }
+        // $signature = $this->input->post('signature');
 //        var_dump($signature); die();
-        $signatureFileName = uniqid().'.png';
-        $signature = str_replace('data:image/png;base64,', '', $signature);
+        // $signatureFileName = uniqid().'.png';
+        // $signature = str_replace('data:image/png;base64,', '', $signature);
 
-        $signature = str_replace(' ', '+', $signature);
-        $data = base64_decode($signature);
-        $file = './upload/applicant_signatures/'.$signatureFileName;
-        file_put_contents($file, $data);
+        // $signature = str_replace(' ', '+', $signature);
+        // $data = base64_decode($signature);
+        // $file = './upload/applicant_signatures/'.$signatureFileName;
+        // file_put_contents($file, $data);
 
 //        var_dump($signature); die();
 
@@ -350,19 +365,19 @@ class Agent extends CI_Controller {
 //        }
 
 
-        $data["page_title"] = "Consent Form - Name Based Criminal Record Check";
+        // $data["page_title"] = "Consent Form - Name Based Criminal Record Check";
 
-        if (!$this->agent_model->name_based_check_consent_save($signatureFileName)) {
+        // if (!$this->agent_model->name_based_check_consent_save($signatureFileName)) {
 //            echo "hi"; die();
 //            redirect('agent/application/name-based-check/consent/' . $this->input->post('client_id') . '/' . $this->input->post('application_id'));
 //            redirect('agent/application/name-based-check/witness' . $this->input->post('client_id') . '/' . $this->input->post('application_id'));
-            redirect('agent/application/name-based-check/witness/' . 12 . '/' . 21);
-        } else {
+        //     redirect('agent/application/name-based-check/witness/' . 12 . '/' . 21);
+        // } else {
 //            echo "No"; die();
 //            redirect('agent/application/name-based-check/signature/' . $this->input->post('client_id') . '/' . $this->input->post('application_id'));
 //            redirect('agent/application/name-based-check/witness' . $this->input->post('client_id') . '/' . $this->input->post('application_id'));
-            redirect('agent/application/name-based-check/witness/' . 12 . '/' . 21);
-        }
+            // redirect('agent/application/name-based-check/witness/' . 12 . '/' . 21);
+        // }
     }
 
 
@@ -436,7 +451,7 @@ class Agent extends CI_Controller {
     public function digital_fingerprint_form(){
         $data["page_title"] = "Digital Finger Printing Form";
         $data['options'] = $this->db->order_by('created_at', 'ASC')->get('digital_fingerprinting_options')->result();
-        $data['states'] = $this->agent_model->get_all_states();
+        //$data['states'] = $this->agent_model->get_all_states();
         $this->load->view('agent/site/digital_fingerprinting_form', $data);
     }
 
@@ -489,13 +504,24 @@ class Agent extends CI_Controller {
         }
     }
 
-    public function app_digital_fingerprinting_form_save() {
-        if ($application_id = $this->agent_model->digital_fingerprinting_form_save()) {
-            redirect('agent/application/digital-fingerprinting/consent/' . $this->agent_model->get_digital_fingerprinting_application_details($application_id)->client_id . '/' . $application_id);
-        }
-        redirect('agent/application/digital-fingerprinting/' . $this->input->post('country'));
-    }
+    // public function app_digital_fingerprinting_form_save() {
+    //     if ($application_id = $this->agent_model->digital_fingerprinting_form_save()) {
+    //         redirect('agent/application/digital-fingerprinting/consent/' . $this->agent_model->get_digital_fingerprinting_application_details($application_id)->client_id . '/' . $application_id);
+    //     }
+    //     redirect('agent/application/digital-fingerprinting/' . $this->input->post('country'));
+    // }
 
+    
+    public function app_digital_fingerprinting_form_save() {
+        if (!$application_id = $this->agent_model->digital_fingerprinting_form_save()) {
+            $this->session->set_tempdata('success_message', ' Digital Fingerprinting Application Added Successfully.',3);
+            redirect('agent/digital_fingerprinting_applications');
+        }
+        else {
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+            redirect('agent/digital_fingerprinting_applications');
+        }
+    }
     public function app_digital_fingerprinting_payment($client_id, $application_id) {
 //        redirect('agent/application/digital-fingerprinting/consent/' . $client_id . '/' . $application_id);
         $data["page_title"] = "Digital Fingerprinting Payment";
@@ -547,29 +573,54 @@ class Agent extends CI_Controller {
         $this->load->view('agent/site/layout', $data);
     }
 
+    // public function app_record_suspension() {
+    //     $data["page_title"] = "Record Suspension";
+    //     $data['main_view'] = "agent/site/record_suspension";
+    //     $this->load->view('agent/site/layout', $data);
+    // }
+
+    // public function app_record_suspension_form() {
+    //     $data["page_title"] = "Record Suspension " ;
+    //     // $data['service'] = $this->db->where('service_slug', 'record-suspension')->get('services')->row();
+    //     // $data['sub_services'] = $this->db->where('service_id', $data['service']->service_id)->order_by('created_at', 'ASC')->get('subservices')->result();
+    //     // $data['delivery_methods'] = $this->db->order_by('created_at', 'ASC')->get('delivery_methods')->result();
+    //      $data["states"] = $this->agent_model->get_states('Canada');
+    //     // $data['country'] = $country;
+    //     $data['main_view'] = "agent/site/record_suspension_form";
+    //     $this->load->view('agent/site/layout', $data);
+    // }
+
+    // public function app_record_suspension_form_save() {
+    //     if ($application_id = $this->agent_model->record_suspension_form_save()) {
+    //         redirect('agent/application/record-suspension/consent/' . $this->agent_model->get_record_suspension_application_details($application_id)->client_id . '/' . $application_id);
+    //     }
+    //     redirect('agent/application/record-suspension/' . $this->input->post('country'));
+    // }
+ 
     public function app_record_suspension() {
-        $data["page_title"] = "Record Suspension";
-        $data['main_view'] = "agent/site/record_suspension";
-        $this->load->view('agent/site/layout', $data);
+        $data["page_title"] = "Record Suspension Form";
+//        $data["application_id"] = $application_id;
+//        $data["client_id"] = $client_id;
+        $this->load->view('agent/site/record_suspension_consent', $data);
     }
 
-    public function app_record_suspension_form() {
-        $data["page_title"] = "Record Suspension " ;
-        // $data['service'] = $this->db->where('service_slug', 'record-suspension')->get('services')->row();
-        // $data['sub_services'] = $this->db->where('service_id', $data['service']->service_id)->order_by('created_at', 'ASC')->get('subservices')->result();
-        // $data['delivery_methods'] = $this->db->order_by('created_at', 'ASC')->get('delivery_methods')->result();
-         $data["states"] = $this->agent_model->get_states('Canada');
-        // $data['country'] = $country;
-        $data['main_view'] = "agent/site/record_suspension_form";
-        $this->load->view('agent/site/layout', $data);
-    }
+    public function app_record_suspension_consent_save() {
 
-    public function app_record_suspension_form_save() {
-        if ($application_id = $this->agent_model->record_suspension_form_save()) {
-            redirect('agent/application/record-suspension/consent/' . $this->agent_model->get_record_suspension_application_details($application_id)->client_id . '/' . $application_id);
+//        echo "hi"; die();
+//        $error = $this->reception_model->record_suspension_consent_save();
+//        var_dump($error);
+//        die();
+
+
+        if (!$this->agent_model->record_suspension_consent_save()) {
+            $this->session->set_tempdata('success_message', 'Record Suspension Application Added Successfully.',3);
+            redirect('agent/record_suspension_applications');
+        } else {
+            $this->session->set_tempdata('errorr_message', 'Something went wrong. Please try again!',3);
+            redirect('agent/record_suspension_applications');
         }
-        redirect('agent/application/record-suspension/' . $this->input->post('country'));
     }
+
 
     public function app_record_suspension_payment($client_id, $application_id) {
 //        redirect('agent/application/record-suspension/consent/' . $client_id . '/' . $application_id);
@@ -603,13 +654,13 @@ class Agent extends CI_Controller {
         $this->load->view('agent/site/layout', $data);
     }
 
-    public function app_record_suspension_consent_save() {
-        if (!$this->agent_model->record_suspension_consent_save()) {
-            redirect('agent/application/record-suspension/consent/' . $this->input->post('client_id') . '/' . $this->input->post('application_id'));
-        } else {
-            redirect('agent/application/record-suspension/success/' . $this->input->post('client_id') . '/' . $this->input->post('application_id'));
-        }
-    }
+    // public function app_record_suspension_consent_save() {
+    //     if (!$this->agent_model->record_suspension_consent_save()) {
+    //         redirect('agent/application/record-suspension/consent/' . $this->input->post('client_id') . '/' . $this->input->post('application_id'));
+    //     } else {
+    //         redirect('agent/application/record-suspension/success/' . $this->input->post('client_id') . '/' . $this->input->post('application_id'));
+    //     }
+    // }
 
     public function app_record_suspension_success($client_id, $application_id) {
         $data["page_title"] = "Success - Record Suspension";

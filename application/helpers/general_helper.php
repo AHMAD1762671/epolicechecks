@@ -18,7 +18,7 @@ function UUID() {
 
 function admin_profile_image() {
     $CI = get_instance();
-    $image_path = base_url('assets') . '/images/admin/' . str_replace(' ', '_', $CI->session->userdata('admin_profile_image'));
+    $image_path = base_url('assets') . '/images/admin/' . str_replace(' ', '_', $CI->session->userdata('user_profile_image'));
     if (getimagesize($image_path)) {
         return $image_path;
     } else {

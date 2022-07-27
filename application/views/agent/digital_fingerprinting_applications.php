@@ -118,7 +118,7 @@
                     foreach ($applications as $key => $value) {
                         ?>
                         <tr>
-                            <th class="align-middle text-center"><?= $value->name_based_application_id ?></th>
+                            <th class="align-middle text-center"><?= $value->digital_fingerprinting_application_id ?></th>
                             <th class="align-middle text-center"><?= $value->consent_last_name ?></th>
                             <th class="align-middle text-center"><?= $value->consent_first_name ?></th>
                             <th class="align-middle text-center"><?= $value->consent_dob ?></th>

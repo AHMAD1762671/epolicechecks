@@ -117,7 +117,7 @@
                     foreach ($applications as $key => $value) {
                         ?>
                         <tr>
-                            <th class="align-middle text-center"><?= $value->name_based_application_id ?></th>
+                            <th class="align-middle text-center"><?= $value->us_entry_waiver_id ?></th>
                             <th class="align-middle text-center"><?= $value->consent_last_name ?></th>
                             <th class="align-middle text-center"><?= $value->consent_first_name ?></th>
                             <th class="align-middle text-center"><?= $value->consent_dob ?></th>
@@ -127,7 +127,7 @@
                             <td class="align-middle"><?= get_admin_email_by_id($value->agent_id) ?></td>
                             <td class="align-middle"><?= $value->created_at ?></td>
 <!--                            <td class="align-middle">-->
-<!--                                <a href="--><?//= base_url() ?><!--agent/security-screening/us-entry-waiver/details/--><?//= $value->us_entry_waiver_id ?><!--" class="btn btn-primary" title="View Application">-->
+<!--                                <a href="--><?//= base_url() ?><!--agent/security-screening/us-entry-waiver/details/<?= $value->us_entry_waiver_id ?>" class="btn btn-primary" title="View Application">-->
 <!--                                    <span class="fa fa-eye"></span>-->
 <!--                                </a>-->
 <!--                            </td>-->

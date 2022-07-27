@@ -113,35 +113,90 @@ class Agent_model extends CI_model {
         return $this->db->where('subservice_id', $subservice_id)->get('service_prices')->row()->service_price;
     }
 
-//    public function name_based_check_form_save() {
-//        $application_id = UUID();
-//        $clinet_id = bin2hex(random_bytes(64));
-//        $data = array(
-//            'state_id' => $this->input->post('state_id'),
-//            'delivery_name' => $this->input->post('delivery_name'),
-//            'delivery_address' => $this->input->post('delivery_address'),
-//            'delivery_city' => $this->input->post('delivery_city'),
-//            'delivery_state' => $this->input->post('delivery_state'),
-//            'delivery_country' => $this->input->post('delivery_country'),
-//            'delivery_phone' => $this->input->post('delivery_phone'),
-//            'delivery_email' => $this->input->post('delivery_email'),
-//            'delivery_method_id' => $this->input->post('delivery_method'),
-//            'delivery_method_price' => $this->input->post('delivery_method_price'),
-//            'sub_total' => $this->input->post('sub_total'),
-//            'tax' => $this->input->post('tax'),
-//            'grand_total' => $this->input->post('grand_total'),
-//            'payment_status' => 0,
-//            'client_id' => $clinet_id,
-//            'agent_id' => $this->session->userdata('agent_id'),
-//            'application_country' => $this->input->post('country')
-//        );
-//        if ($this->db->insert('name_based_applications', $data)) {
-//            $aplication_id = $this->db->insert_id();
-//            return $aplication_id;
-//        } else {
+   public function name_based_check_form_save() {
+       $application_id = UUID();
+       $clinet_id = bin2hex(random_bytes(64));
+       $data = array(
+           'state_id' => $this->input->post('state_id'),
+           'delivery_name' => $this->input->post('delivery_name'),
+           'delivery_address' => $this->input->post('delivery_address'),
+           'delivery_city' => $this->input->post('delivery_city'),
+           'delivery_state' => $this->input->post('delivery_state'),
+           'delivery_country' => $this->input->post('delivery_country'),
+           'delivery_phone' => $this->input->post('delivery_phone'),
+           'delivery_email' => $this->input->post('delivery_email'),
+        //    'delivery_method_id' => $this->input->post('delivery_method'),
+        //    'delivery_method_price' => $this->input->post('delivery_method_price'),
+        //    'sub_total' => $this->input->post('sub_total'),
+        //    'tax' => $this->input->post('tax'),
+        //    'grand_total' => $this->input->post('grand_total'),
+        //    'payment_status' => 0,
+           'client_id' => $clinet_id,
+           'agent_id' => $this->session->userdata('agent_id'),
+        //    'application_country' => $this->input->post('country')
+       );
+       if ($this->db->insert('name_based_applications', $data)) {
+           $aplication_id = $this->db->insert_id();
+           return $aplication_id;
+       } else {
+           return FALSE;
+       }
+   }
+
+   public function name_based_check_consent_save() {
+    $application_id = $this->input->post('application_id');
+    $data = array(
+        'consent_last_name' => $this->input->post('consent_last_name'),
+        'consent_first_name' => $this->input->post('consent_first_name'),
+        'consent_middle_name' => $this->input->post('consent_middle_name'),
+        'consent_nickname' => $this->input->post('consent_nickname'),
+        'consent_dob' => $this->input->post('consent_dob'),
+        'consent_birth_place' => $this->input->post('consent_birth_place'),
+//            'consent_country' => $this->input->post('consent_current_address'),,
+        'consent_phone' => $this->input->post('consent_phone'),
+        'consent_cellphone' => $this->input->post('consent_cellphone'),
+        'consent_email' => $this->input->post('consent_email'),
+        'consent_current_address' => $this->input->post('consent_current_address'),
+        'consent_current_city' => $this->input->post('consent_current_city'),
+        'consent_current_state' => $this->input->post('consent_current_state'),
+        'consent_current_post_code' => $this->input->post('consent_current_post_code'),
+//            'consent_previous_address' => $this->input->post('consent_previous_address'),,
+        'consent_arrested_canada' => $this->input->post('consent_arrested_canada'),
+        'consent_arrested_america' => $this->input->post('consent_arrested_america'),
+        'consent_arrested_foreign' => $this->input->post('consent_arrested_foreign'),
+        'consent_refused_border' => $this->input->post('consent_refused_border'),
+        'consent_refused_border_date' => $this->input->post('consent_refused_border_date'),
+        'consent_deported_america' => $this->input->post('consent_deported_america'),
+        'consent_deported_america_date' => $this->input->post('consent_deported_america_date'),
+        'consent_criminal_country' => $this->input->post('consent_criminal_country'),
+        'consent_criminal_offence' => $this->input->post('consent_criminal_offence'),
+//            'consent_previous_city' => $this->input->post('consent_previous_city'),,
+//            'consent_previous_state' => $this->input->post('consent_previous_state'),,
+//            'consent_previous_post_code' => $this->input->post('consent_previous_post_code'),,
+//            'consent_reason' => $this->input->post('consent_reason'),,
+//            'consent_reason_other' => $this->input->post('consent_reason_other'),,
+//            'consent_organization' => $this->input->post('consent_organization'),,
+//            'consent_contact_name' => $this->input->post('consent_contact_name'),,
+//            'consent_contact_phone' => $this->input->post('consent_contact_phone'),,
+        'consent_comments' => $this->input->post('consent_comments'),
+//            'created_at' => date('Y-m-d H:i:s', time()),
+//            'application_completed' => 1
+    );
+
+//        var_dump($data);
+//        var_dump($application_id);
+//        die();
+
+    $this->db->where('name_based_application_id', $application_id);
+    if ($this->db->update('name_based_applications', $data)) {
+        return $this->db->error();
+//            return true;
+    }
+    else {
+        return $this->db->error();
 //            return FALSE;
-//        }
-//    }
+    }
+}
 
 //    public function name_based_check_form_services_save($application_id) {
 //        $data = array();
@@ -189,69 +244,69 @@ class Agent_model extends CI_model {
 //        return $this->db->update('name_based_applications', $data);
 //    }
 
-    public function name_based_check_consent_save($signature_name) {
-        $application_id = UUID();
-        $client_id = bin2hex(random_bytes(64));
+//     public function name_based_check_consent_save($signature_name) {
+//         $application_id = UUID();
+//         $client_id = bin2hex(random_bytes(64));
 
-        $data = array(
-            'consent_last_name' => $this->input->post('consent_last_name'),
-            'consent_first_name' => $this->input->post('consent_first_name'),
-            'consent_middle_name' => $this->input->post('consent_middle_name'),
-            'consent_nickname' => $this->input->post('consent_nickname'),
-            'consent_gender' => $this->input->post('consent_gender'),
-            'consent_dob' => $this->input->post('consent_dob'),
-            'consent_birth_place' => $this->input->post('consent_birth_place'),
-            'consent_country' => $this->input->post('consent_country'),
-            'consent_phone' => $this->input->post('consent_phone'),
-            'consent_cellphone' => $this->input->post('consent_cellphone'),
-            'consent_email' => $this->input->post('consent_email'),
-            'consent_current_address' => $this->input->post('consent_current_address'),
-            'consent_current_city' => $this->input->post('consent_current_city'),
-            'consent_current_state' => $this->input->post('consent_current_state'),
-            'consent_current_post_code' => $this->input->post('consent_current_post_code'),
-            'consent_previous_address' => $this->input->post('consent_previous_address'),
-            'consent_reason' => $this->input->post('consent_reason'),
-            'consent_reason_other' => $this->input->post('consent_reason_other'),
-            'consent_organization' => $this->input->post('consent_organization'),
-            'consent_contact_name' => $this->input->post('consent_contact_name'),
-            'consent_contact_phone' => $this->input->post('consent_contact_phone'),
-            'consent_criminal_offence' => $this->input->post('consent_criminal_offence'),
-            'consent_signature_drawable' => $signature_name,
-            'client_id' => $client_id,
-            'agent_id' => $this->session->userdata('agent_id'),
-        );
+//         $data = array(
+//             'consent_last_name' => $this->input->post('consent_last_name'),
+//             'consent_first_name' => $this->input->post('consent_first_name'),
+//             'consent_middle_name' => $this->input->post('consent_middle_name'),
+//             'consent_nickname' => $this->input->post('consent_nickname'),
+//             'consent_gender' => $this->input->post('consent_gender'),
+//             'consent_dob' => $this->input->post('consent_dob'),
+//             'consent_birth_place' => $this->input->post('consent_birth_place'),
+//             'consent_country' => $this->input->post('consent_country'),
+//             'consent_phone' => $this->input->post('consent_phone'),
+//             'consent_cellphone' => $this->input->post('consent_cellphone'),
+//             'consent_email' => $this->input->post('consent_email'),
+//             'consent_current_address' => $this->input->post('consent_current_address'),
+//             'consent_current_city' => $this->input->post('consent_current_city'),
+//             'consent_current_state' => $this->input->post('consent_current_state'),
+//             'consent_current_post_code' => $this->input->post('consent_current_post_code'),
+//             'consent_previous_address' => $this->input->post('consent_previous_address'),
+//             'consent_reason' => $this->input->post('consent_reason'),
+//             'consent_reason_other' => $this->input->post('consent_reason_other'),
+//             'consent_organization' => $this->input->post('consent_organization'),
+//             'consent_contact_name' => $this->input->post('consent_contact_name'),
+//             'consent_contact_phone' => $this->input->post('consent_contact_phone'),
+//             'consent_criminal_offence' => $this->input->post('consent_criminal_offence'),
+//             'consent_signature_drawable' => $signature_name,
+//             'client_id' => $client_id,
+//             'agent_id' => $this->session->userdata('agent_id'),
+//         );
 
-//        var_dump($data); die();
+// //        var_dump($data); die();
 
-        if ($this->db->insert('name_based_applications', $data)) {
-            $application_id = $this->db->insert_id();
-            var_dump($application_id); die();
-            return $aplication_id;
-        }
-
-
+//         if ($this->db->insert('name_based_applications', $data)) {
+//             $application_id = $this->db->insert_id();
+//             var_dump($application_id); die();
+//             return $aplication_id;
+//         }
 
 
-        $this->db->where('name_based_application_id', $application_id)->where('client_id', $client_id);
-        if ($this->db->update('name_based_applications', $data)) {
-            if ($this->name_based_check_consent_offence_save($application_id)) {
 
-                //            insert data for notifications
-                $data = array(
-                    'table_id' => $application_id,
-                    'table_name' => 'name_based_applications',
-                    'description' => 'record_inserted'
-                );
-                $this->db->insert('application_notification', $data);
 
-                return $application_id;
-            } else {
-                return FALSE;
-            }
-        } else {
-            return FALSE;
-        }
-    }
+//         $this->db->where('name_based_application_id', $application_id)->where('client_id', $client_id);
+//         if ($this->db->update('name_based_applications', $data)) {
+//             if ($this->name_based_check_consent_offence_save($application_id)) {
+
+//                 //            insert data for notifications
+//                 $data = array(
+//                     'table_id' => $application_id,
+//                     'table_name' => 'name_based_applications',
+//                     'description' => 'record_inserted'
+//                 );
+//                 $this->db->insert('application_notification', $data);
+
+//                 return $application_id;
+//             } else {
+//                 return FALSE;
+//             }
+//         } else {
+//             return FALSE;
+//         }
+//     }
 
     public function name_based_check_consent_offence_save($application_id) {
         $this->db->where('application_id', $application_id)->delete('application_consent_offence');
@@ -299,52 +354,141 @@ class Agent_model extends CI_model {
 //    }
 
 
+    // public function digital_fingerprinting_form_save() {
+    //     $application_id = UUID();
+    //     $clinet_id = bin2hex(random_bytes(64));
+    //     $data = array(
+    //         'state_id' => $this->input->post('state_id'),
+    //         'agency_state' => $this->input->post('agency_state'),
+    //         'agency_city' => $this->input->post('agency_city'),
+    //         'agency_address' => $this->input->post('agency_address'),
+    //         'delivery_name' => $this->input->post('delivery_name'),
+    //         'delivery_address' => $this->input->post('delivery_address'),
+    //         'delivery_city' => $this->input->post('delivery_city'),
+    //         'delivery_state' => $this->input->post('delivery_state'),
+    //         'delivery_country' => $this->input->post('delivery_country'),
+    //         'delivery_phone' => $this->input->post('delivery_phone'),
+    //         'delivery_email' => $this->input->post('delivery_email'),
+    //         'share_result' => $this->input->post('share_result'),
+    //         'share_email' => $this->input->post('share_email'),
+    //         'delivery_method_id' => $this->input->post('delivery_method'),
+    //         'delivery_method_price' => $this->input->post('delivery_method_price'),
+    //         'sub_total' => $this->input->post('sub_total'),
+    //         'tax' => $this->input->post('tax'),
+    //         'grand_total' => $this->input->post('grand_total'),
+    //         'payment_status' => 0,
+    //         'client_id' => $clinet_id,
+    //         'agent_id' => $this->session->userdata('agent_id'),
+    //         'application_country' => $this->input->post('country')
+    //     );
+    //     if ($this->db->insert('digital_fingerprinting_applications', $data)) {
+    //         $aplication_id = $this->db->insert_id();
+    //         if ($this->digital_fingerprinting_form_services_save($aplication_id)) {
+    //             $services = $this->input->post('digital_fingerprinting_options');
+    //             foreach ($services as $value) {
+    //                 $data = array(
+    //                     'digital_fingerprinting_application_option' => $value,
+    //                     'application_id' => $aplication_id
+    //                 );
+    //                 $this->db->insert('digital_fingerprinting_application_options', $data);
+    //             }
+    //             return $aplication_id;
+    //         } else {
+    //             return FALSE;
+    //         }
+    //     } else {
+    //         return FALSE;
+    //     }
+    // }
+
     public function digital_fingerprinting_form_save() {
-        $application_id = UUID();
-        $clinet_id = bin2hex(random_bytes(64));
+//        $application_id = UUID();
+//        $clinet_id = bin2hex(random_bytes(64));
         $data = array(
-            'state_id' => $this->input->post('state_id'),
-            'agency_state' => $this->input->post('agency_state'),
-            'agency_city' => $this->input->post('agency_city'),
-            'agency_address' => $this->input->post('agency_address'),
-            'delivery_name' => $this->input->post('delivery_name'),
-            'delivery_address' => $this->input->post('delivery_address'),
-            'delivery_city' => $this->input->post('delivery_city'),
-            'delivery_state' => $this->input->post('delivery_state'),
-            'delivery_country' => $this->input->post('delivery_country'),
-            'delivery_phone' => $this->input->post('delivery_phone'),
-            'delivery_email' => $this->input->post('delivery_email'),
-            'share_result' => $this->input->post('share_result'),
-            'share_email' => $this->input->post('share_email'),
-            'delivery_method_id' => $this->input->post('delivery_method'),
-            'delivery_method_price' => $this->input->post('delivery_method_price'),
-            'sub_total' => $this->input->post('sub_total'),
-            'tax' => $this->input->post('tax'),
-            'grand_total' => $this->input->post('grand_total'),
-            'payment_status' => 0,
-            'client_id' => $clinet_id,
+            'series_type' => $this->input->post('series_type'),
+            'consent_first_name' => $this->input->post('consent_first_name'),
+            'consent_middle_name' => $this->input->post('consent_middle_name'),
+            'consent_last_name' => $this->input->post('consent_last_name'),
+            'consent_maiden_name' => $this->input->post('consent_nick_name'),
+            'consent_dob' => $this->input->post('consent_dob'),
+            'consent_place_of_birth' => $this->input->post('consent_place_of_birth'),
+            'consent_phone' => $this->input->post('consent_phone'),
+            'consent_cellphone' => $this->input->post('consent_cellphone'),
+            'consent_email' => $this->input->post('consent_email'),
+            'consent_current_address' => $this->input->post('consent_current_address'),
+            'fingerprinting_agency_address' => $this->input->post('fingerprinting_agency_address'),
+            'fingerprinting_agency_phone' => $this->input->post('fingerprinting_agency_tel'),
+            'rcmp_type' => $this->input->post('rcmp_application_type'),
+            'send_result' => $this->input->post('send_result_to'),
+            'appointment_time' => $this->input->post('appointment_time'),
+            'gender' => $this->input->post('consent_gender'),
+
+            'hair_color' => $this->input->post('consent_hair_color'),
+            'eye_color' => $this->input->post('consent_eye_color'),
+            'height' => $this->input->post('consent_height'),
+            'weight' => $this->input->post('consent_weight'),
+
+
+            'federal_employment' => $this->input->post('federal_employment'),
+            'federal_employer_name' => $this->input->post('federal_employer_name'),
+            'federal_job_title' => $this->input->post('federal_job_title'),
+
+            'provincial_employment' => $this->input->post('provincial_employment'),
+            'provincial_employer_name' => $this->input->post('provincial_employer_name'),
+            'provincial_employer_title' => $this->input->post('provincial_job_title'),
+
+            'private_industry' => $this->input->post('private_industry'),
+            'private_industry_company_name' => $this->input->post('private_industry_company_name'),
+            'private_industry_position' => $this->input->post('private_industry_position'),
+
+            'Citizenship' => $this->input->post('citizenship'),
+            'citizenship_ircc_file_no' => $this->input->post('citizenship_ircc_file_no'),
+            'citizenship_uci' => $this->input->post('citizenship_uci'),
+
+
+            'permanent_residency' => $this->input->post('permanent_residency'),
+            'permanent_residency_ircc_no' => $this->input->post('permanent_residency_ircc_file_no'),
+            'permanent_residency_uci' => $this->input->post('permanent_residency_uci'),
+
+
+            'vulnerable_sector' => $this->input->post('vulnerable_sector'),
+            'volunteer_work' => $this->input->post('volunteer_work'),
+            'adoption' => $this->input->post('adoption'),
+            'fbi' => $this->input->post('fbi'),
+            'international_fingerprints' => $this->input->post('international_fingerprints'),
+
+            'record_suspension' => $this->input->post('record_suspension'),
+            'us_entry_waiver_travel_visa' => $this->input->post('us_entry_waiver_travel_visa'),
+            'name_change' => $this->input->post('name_change'),
+            'other' => $this->input->post('other'),
+
+            'other_text' => $this->input->post('other_text'),
+            'comment' => $this->input->post('consent_comments'),
+
+            'officer_name' => $this->input->post('officer_name'),
+            'date_fingerprinted' => $this->input->post('date_fingerprinted'),
+            'time_fingerprinted' => $this->input->post('time_fingerprinted'),
+            'date_submitted' => $this->input->post('date_submitted'),
+            'result_delivery' => $this->input->post('result_deliver'),
+            'address' => $this->input->post('address'),
+            'rcmp_status' => $this->input->post('rcmp_status'),
+            'dcb_number' => $this->input->post('dcn_number'),
+            'referred_by' => $this->input->post('referred_by'),
+//            'edit_application' => $this->input->post('consent_comments'),
             'agent_id' => $this->session->userdata('agent_id'),
-            'application_country' => $this->input->post('country')
         );
+//        var_dump($data); die();
+
+
         if ($this->db->insert('digital_fingerprinting_applications', $data)) {
             $aplication_id = $this->db->insert_id();
-            if ($this->digital_fingerprinting_form_services_save($aplication_id)) {
-                $services = $this->input->post('digital_fingerprinting_options');
-                foreach ($services as $value) {
-                    $data = array(
-                        'digital_fingerprinting_application_option' => $value,
-                        'application_id' => $aplication_id
-                    );
-                    $this->db->insert('digital_fingerprinting_application_options', $data);
-                }
-                return $aplication_id;
-            } else {
-                return FALSE;
-            }
-        } else {
+            return $aplication_id;
+        }
+        else {
             return FALSE;
         }
     }
+
 
     public function digital_fingerprinting_form_services_save($application_id) {
         $data = array();
@@ -512,9 +656,49 @@ class Agent_model extends CI_model {
         return $this->db->update('record_suspension_applications', $data);
     }
 
+    // public function record_suspension_consent_save() {
+    //     $application_id = $this->input->post('application_id');
+    //     $client_id = $this->input->post('client_id');
+    //     $data = array(
+    //         'consent_last_name' => $this->input->post('consent_last_name'),
+    //         'consent_first_name' => $this->input->post('consent_first_name'),
+    //         'consent_middle_name' => $this->input->post('consent_middle_name'),
+    //         'consent_nickname' => $this->input->post('consent_nickname'),
+    //         'consent_dob' => $this->input->post('consent_dob'),
+    //         'consent_birth_place' => $this->input->post('consent_birth_place'),
+    //         'consent_phone' => $this->input->post('consent_phone'),
+    //         'consent_cellphone' => $this->input->post('consent_cellphone'),
+    //         'consent_email' => $this->input->post('consent_email'),
+    //         'consent_current_address' => $this->input->post('consent_current_address'),
+    //         'consent_current_state' => $this->input->post('consent_current_state'),
+    //         'consent_current_post_code' => $this->input->post('consent_current_post_code'),
+    //         'consent_arrested_canada' => $this->input->post('consent_arrested_canada'),
+    //         'consent_arrested_america' => $this->input->post('consent_arrested_america'),
+    //         'consent_arrested_foreign' => $this->input->post('consent_arrested_foreign'),
+    //         'consent_refused_border' => $this->input->post('consent_refused_border'),
+    //         'consent_refused_border_date' => $this->input->post('consent_refused_border_date'),
+    //         'consent_deported_america' => $this->input->post('consent_deported_america'),
+    //         'consent_deported_america_date' => $this->input->post('consent_deported_america_date'),
+    //         'consent_criminal_country' => $this->input->post('consent_criminal_country'),
+    //         'consent_criminal_offence' => $this->input->post('consent_criminal_offence'),
+    //         'consent_comments' => $this->input->post('consent_comments'),
+    //         'created_at' => date('Y-m-d H:i:s', time()),
+    //         'application_completed' => 1
+    //     );
+    //     $this->db->where('record_suspension_id', $application_id)->where('client_id', $client_id);
+    //     if ($this->db->update('record_suspension_applications', $data)) {
+    //         if ($this->record_suspension_consent_offence_save($application_id)) {
+    //             return $application_id;
+    //         } else {
+    //             return FALSE;
+    //         }
+    //     } else {
+    //         return FALSE;
+    //     }
+    // }
+
+
     public function record_suspension_consent_save() {
-        $application_id = $this->input->post('application_id');
-        $client_id = $this->input->post('client_id');
         $data = array(
             'consent_last_name' => $this->input->post('consent_last_name'),
             'consent_first_name' => $this->input->post('consent_first_name'),
@@ -538,18 +722,15 @@ class Agent_model extends CI_model {
             'consent_criminal_country' => $this->input->post('consent_criminal_country'),
             'consent_criminal_offence' => $this->input->post('consent_criminal_offence'),
             'consent_comments' => $this->input->post('consent_comments'),
+            'agent_id' => $this->session->userdata('agent_id'),
             'created_at' => date('Y-m-d H:i:s', time()),
             'application_completed' => 1
         );
-        $this->db->where('record_suspension_id', $application_id)->where('client_id', $client_id);
-        if ($this->db->update('record_suspension_applications', $data)) {
-            if ($this->record_suspension_consent_offence_save($application_id)) {
-                return $application_id;
-            } else {
-                return FALSE;
-            }
+        if ($this->db->insert('record_suspension_applications', $data)) {
+            $aplication_id = $this->db->insert_id();
+            return $aplication_id;
         } else {
-            return FALSE;
+            return $this->db->error();
         }
     }
 
@@ -756,7 +937,7 @@ class Agent_model extends CI_model {
         }
         $this->db->select('name_based_applications.*');
         $this->db->from('name_based_applications');
-        $this->db->where('application_completed', 1);
+        // $this->db->where('application_completed', 1);
         $this->db->where('agent_id', $this->session->userdata('agent_id'));
         return $this->db->order_by('name_based_application_id', 'DESC');
     }
@@ -897,7 +1078,7 @@ class Agent_model extends CI_model {
         }
         $this->db->select('us_entry_waiver_applications.*');
         $this->db->from('us_entry_waiver_applications');
-        $this->db->where('application_completed', 1);
+        //$this->db->where('application_completed', 1);
         $this->db->where('agent_id', $this->session->userdata('agent_id'));
         return $this->db->order_by('us_entry_waiver_id', 'DESC');
     }
