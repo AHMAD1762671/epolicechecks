@@ -70,7 +70,7 @@
                             <p class="text-primary text-20 m-0">Record Suspension</p>
                         </div>
 
-                        <a href="<?php echo base_url('agent/app_record_suspension_form'); ?>" target="_blank">
+                        <a href="<?php echo base_url('agent/app_record_suspension'); ?>" target="_blank">
                             <button type="button" class="btn btn-success" style="width: 100%;">
                                 Start New Application
                             </button>
@@ -94,7 +94,7 @@
                             <p class="text-primary text-20 m-0">U.S. Entry Waiver</p>
                         </div>
 
-                        <a href="<?php echo base_url('agent/app_us_entry_waiver_form'); ?>" target="_blank">
+                        <a href="<?php echo base_url('agent/app_record_suspension'); ?>" target="_blank">
                             <button type="button" class="btn btn-success" style="width: 100%;">
                                 Start New Application
                             </button>

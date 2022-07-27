@@ -570,7 +570,7 @@
 
 
 
-    <form role="form" method="post" action="<?php echo base_url('reception/app_record_suspension_consent_save'); ?>">
+    <form role="form" method="post" action="<?php echo base_url('agent/app_record_suspension_consent_save'); ?>">
 
         <!--        step1-->
         <div class="panel panel-primary setup-content" id="step-1">
