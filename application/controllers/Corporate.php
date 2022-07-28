@@ -811,7 +811,7 @@ class Corporate extends CI_Controller {
                     );
 
                 if($result){
-                    $query = $this->db->where('email', $this->input->post('email'))->get('users');
+                    $query = $this->db->where('email', $this->input->post('name')[$i])->get('users');
                     if ($query->num_rows() > 0){
                         $row = $query->row();
                         $ind_user = array(
@@ -841,9 +841,9 @@ class Corporate extends CI_Controller {
                     $this->email->send();
                 }
                 else {
-                    $this->session->set_tempdata('no_user_access', 'Invalid Email! Please try again.',3);
+                    $this->session->set_tempdata('error_message', 'Invalid Email! Please try again.',3);
                 }
-                $this->session->set_tempdata('signup_success', 'Reset password link has been sent. Check your inbox.',3);
+                $this->session->set_tempdata('success_message', 'Reset password link has been sent. Check your inbox.',3);
                 redirect('corporate/invite_employee');
             }
         }

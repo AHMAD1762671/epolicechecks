@@ -53,8 +53,8 @@ class Corporate_model extends CI_model {
         }
 
         $options = ['cost' => 10];
-        $encrypted_pass = '12345';
-//        $encrypted_pass = password_hash($this->input->post('password'), PASSWORD_BCRYPT, $options);
+        $encry_pass = '12345';
+        $encrypted_pass = password_hash($encry_pass, PASSWORD_BCRYPT, $options);
         $data = array(
 //            'first_name' => $this->input->post('first_name'),
 //            'last_name' => $this->input->post('last_name'),
@@ -86,7 +86,7 @@ class Corporate_model extends CI_model {
 
             $htmlContent = '<h1>ePolice User Request Approved</h1>';
             $htmlContent .= '<p>User Name:  "'.$email.'" </p>';
-            $htmlContent .= '<p>Password: "'.$encrypted_pass.'"</p>';
+            $htmlContent .= '<p>Password: "'.$encry_pass.'"</p>';
             $htmlContent .= '<p>URL: "'.$url.'"</p>';
 
             $this->email->to($email);
