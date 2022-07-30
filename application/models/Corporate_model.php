@@ -1084,7 +1084,7 @@ class Corporate_model extends CI_model {
                 'telephone' => $this->input->post('telephone'),
                 'cell' => $this->input->post('cell'),
                 'fax' => $this->input->post('fax'),
-                'profile_image' => $this->input->post('profile_picture')
+                'profile_image' => $this->input->post('upload_image')
             );
         }
 

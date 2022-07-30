@@ -25,35 +25,6 @@
     </div>
 </div>
 
-<hr/>
-
-<div class="row">
-    <div class="col-md-12 col-lg-12">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-<!--                    <th class="align-middle text-center" scope="col">ID</th>-->
-                    <th class="align-middle text-center" scope="col">Send to</th>
-                    <th class="align-middle text-center" scope="col">Application</th>
-                    <th class="align-middle text-center" scope="col">Submitted by</th>
-                    <th class="align-middle text-center" scope="col">Created at</th>
-                </tr>
-                </thead>
-                <tbody>
-<!--                <td></td>-->
-                <td></td>
-                <td></td>
-                <td></td>
-                </tbody>
-            </table>
-        </div>
-        <?php echo $this->paginator->get_links(); ?>
-    </div>
-</div>
-
-
-
 <script>
     $(document).ready(function(){
         var i=1;

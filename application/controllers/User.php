@@ -374,6 +374,18 @@ class User extends CI_Controller{
         $data['sub_agent_completedrecordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $subagentwhere);
         $data['sub_agent_completedusEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $subagentwhere);
 
+        $sub_corporate_id = $this->session->userdata('sub_corporate_user_id');
+        $subcorporatewhereuser = array('sub_corporate_id' => $sub_corporate_id );
+        $one = 1;
+        $data['sub_corporate_get_namebase'] = $this->user_model->get_total_record('name_based_applications', $subcorporatewhereuser);
+        $data['sub_corporate_fingerprinting'] = $this->user_model->get_total_record('digital_fingerprinting_applications', $subcorporatewhereuser);
+        $data['sub_corporate_recordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $subcorporatewhereuser);
+        $data['sub_corporate_usEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $subcorporatewhereuser);
+        $subcorporatewhere = array('sub_corporate_id' => $sub_corporate_id ,'application_completed' => $one);
+        $data['sub_corporate_completedget_namebase'] = $this->user_model->get_total_record('name_based_applications', $subcorporatewhere);
+        $data['sub_corporate_completedfingerprinting'] = $this->user_model->get_total_record('digital_fingerprinting_applications', $subcorporatewhere);
+        $data['sub_corporate_completedrecordSuspension'] = $this->user_model->get_total_record('record_suspension_applications', $subcorporatewhere);
+        $data['sub_corporate_completedusEntry'] = $this->user_model->get_total_record('us_entry_waiver_applications', $subcorporatewhere);
 
         $data['comments'] = $this->user_model->get_comments();
         $this->load->view('user/layout', $data);
@@ -1309,7 +1321,7 @@ class User extends CI_Controller{
                 } else {
                     $this->session->set_tempdata('no_user_access', 'Invalid Email! Please try again.',3);
                 }
-                redirect('corporate/invite_employee');
+                redirect('user/invite_corporate_employees');
             }
         }
     }
@@ -1380,7 +1392,7 @@ class User extends CI_Controller{
                     $_FILES['file']['size']     = $_FILES['files']['size'][$i];
 
                     // File upload configuration
-                    $uploadPath = 'upload/service_order_images/';
+                    $uploadPath = 'uploads/service_order_images/';
                     $config['upload_path'] = $uploadPath;
                     $config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
 

@@ -304,6 +304,7 @@
             <?php echo $this->paginator->get_links(); ?>
         </div>
     </div>
+</div>
 
 
 
@@ -314,51 +315,49 @@
 
 
 
-
-
-    <script>
-        $(document).ready(function(){
-            $('#country').change(function(){
-                var country_id = $('#Country').val();
-                if(country_id != '')
-                {
-                    $.ajax({
-                        url:"<?php echo base_url(); ?>agent/fetch_state",
-                        method:"POST",
-                        data:{country_id:country_id},
-                        success:function(data)
-                        {
-                            $('#Province').html(data);
-                            $('#City').html('<option value="">Select City</option>');
-                        }
-                    });
-                }
-                else
-                {
-                    $('#Province').html('<option value="">Select State</option>');
-                    $('#City').html('<option value="">Select City</option>');
-                }
-            });
-
-            $('#state').change(function(){
-                var state_id = $('#Province').val();
-                if(state_id != '')
-                {
-                    $.ajax({
-                        url:"<?php echo base_url(); ?>agent/fetch_city",
-                        method:"POST",
-                        data:{state_id:state_id},
-                        success:function(data)
-                        {
-                            $('#City').html(data);
-                        }
-                    });
-                }
-                else
-                {
-                    $('#City').html('<option value="">Select City</option>');
-                }
-            });
-
+<script>
+    $(document).ready(function(){
+        $('#country').change(function(){
+            var country_id = $('#Country').val();
+            if(country_id != '')
+            {
+                $.ajax({
+                    url:"<?php echo base_url(); ?>agent/fetch_state",
+                    method:"POST",
+                    data:{country_id:country_id},
+                    success:function(data)
+                    {
+                        $('#Province').html(data);
+                        $('#City').html('<option value="">Select City</option>');
+                    }
+                });
+            }
+            else
+            {
+                $('#Province').html('<option value="">Select State</option>');
+                $('#City').html('<option value="">Select City</option>');
+            }
         });
-    </script>
+
+        $('#state').change(function(){
+            var state_id = $('#Province').val();
+            if(state_id != '')
+            {
+                $.ajax({
+                    url:"<?php echo base_url(); ?>agent/fetch_city",
+                    method:"POST",
+                    data:{state_id:state_id},
+                    success:function(data)
+                    {
+                        $('#City').html(data);
+                    }
+                });
+            }
+            else
+            {
+                $('#City').html('<option value="">Select City</option>');
+            }
+        });
+
+    });
+</script>

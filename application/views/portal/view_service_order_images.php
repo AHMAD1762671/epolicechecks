@@ -97,7 +97,7 @@
                         <th class="align-middle "><?= $value['created_at'] ?></th>
 
                         <td class="align-middle">
-                            <a target="_blank" href="<?= base_url().'upload/service_order_images/'.$value['file_name'] ?>" class="btn btn-success" title="View Service Order">
+                            <a target="_blank" href="<?= base_url().'uploads/service_order_images/'.$value['file_name'] ?>" class="btn btn-success" title="View Service Order">
                                 <span class="fa fa-eye"></span>
                             </a>
 
@@ -107,7 +107,7 @@
 
 
 
-                            <a href="<?php echo base_url('upload/service_order_images/').$service_order_images[0]['file_name']; ?>" target="_blank">
+                            <a href="<?php echo base_url('uploads/service_order_images/').$service_order_images[0]['file_name']; ?>" target="_blank">
                                 <button style="margin-top: 1px;" class="btn btn-danger" data-toggle="modal" data-target="#forward_application_to_user" title="Download Service Order">
                                     <span class="fa fa-download"></span>
                                 </button>

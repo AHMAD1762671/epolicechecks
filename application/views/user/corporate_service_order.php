@@ -76,12 +76,12 @@
                     <tr>
                         <th class="align-middle text-center"><?php echo $i++; ?></th>
                         <th class="align-middle">
-                            <img height="50" width="50" src="<?= base_url().'/upload/service_order_images/'.$value->file_name ?>">
+                            <img height="50" width="50" src="<?= base_url().'/uploads/service_order_images/'.$value->file_name ?>">
                         </th>
                         <th class="align-middle text-center"> <?= get_email_by_id($value->created_by) ?> </th>
                         <th class="align-middle text-center"><?= $value->created_at ?></th>
                         <td class="align-middle">
-                            <a target="_blank" href="<?= base_url().'/upload/service_order_images/'.$value->file_name ?>" class="btn btn-primary" title="View Application">
+                            <a target="_blank" href="<?= base_url().'/uploads/service_order_images/'.$value->file_name ?>" class="btn btn-primary" title="View Application">
                                 <span class="fa fa-eye"></span>
                             </a>
                         </td>
